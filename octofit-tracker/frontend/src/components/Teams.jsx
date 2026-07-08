@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 const Teams = () => {
   const codespaceName = import.meta.env.VITE_CODESPACE_NAME || import.meta.env.CODESPACE_NAME;
-  const base = codespaceName
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+  const endpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/teams`
+    : `${import.meta.env.VITE_API_URL || 'http://localhost:8000/api'}/teams`;
 
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const Teams = () => {
     async function fetchTeams() {
       setLoading(true);
       try {
-        const res = await fetch(`${base}/teams`);
+        const res = await fetch(endpoint);
         const json = await res.json();
         if (Array.isArray(json)) setTeams(json);
         else if (json.items && Array.isArray(json.items)) setTeams(json.items);
@@ -28,7 +28,7 @@ const Teams = () => {
     }
 
     fetchTeams();
-  }, [base]);
+  }, [endpoint]);
 
   if (loading) return <p>Loading teams...</p>;
 

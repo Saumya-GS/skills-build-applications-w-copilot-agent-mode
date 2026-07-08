@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 const Workouts = () => {
   const codespaceName = import.meta.env.VITE_CODESPACE_NAME || import.meta.env.CODESPACE_NAME;
-  const base = codespaceName
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+  const endpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/workouts`
+    : `${import.meta.env.VITE_API_URL || 'http://localhost:8000/api'}/workouts`;
 
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const Workouts = () => {
     async function fetchWorkouts() {
       setLoading(true);
       try {
-        const res = await fetch(`${base}/workouts`);
+        const res = await fetch(endpoint);
         const json = await res.json();
         if (Array.isArray(json)) setWorkouts(json);
         else if (json.items && Array.isArray(json.items)) setWorkouts(json.items);
@@ -28,7 +28,7 @@ const Workouts = () => {
     }
 
     fetchWorkouts();
-  }, [base]);
+  }, [endpoint]);
 
   if (loading) return <p>Loading workouts...</p>;
 

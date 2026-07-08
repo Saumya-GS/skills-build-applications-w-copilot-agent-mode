@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 const Users = () => {
   const codespaceName = import.meta.env.VITE_CODESPACE_NAME || import.meta.env.CODESPACE_NAME;
-  const base = codespaceName
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+  const endpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/users`
+    : `${import.meta.env.VITE_API_URL || 'http://localhost:8000/api'}/users`;
 
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const Users = () => {
     async function fetchUsers() {
       setLoading(true);
       try {
-        const res = await fetch(`${base}/users`);
+        const res = await fetch(endpoint);
         const json = await res.json();
         if (Array.isArray(json)) setUsers(json);
         else if (json.items && Array.isArray(json.items)) setUsers(json.items);
@@ -28,7 +28,7 @@ const Users = () => {
     }
 
     fetchUsers();
-  }, [base]);
+  }, [endpoint]);
 
   if (loading) return <p>Loading users...</p>;
 

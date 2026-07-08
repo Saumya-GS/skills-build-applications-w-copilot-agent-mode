@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 const Leaderboard = () => {
   const codespaceName = import.meta.env.VITE_CODESPACE_NAME || import.meta.env.CODESPACE_NAME;
-  const base = codespaceName
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+  const endpoint = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard`
+    : `${import.meta.env.VITE_API_URL || 'http://localhost:8000/api'}/leaderboard`;
 
   const [data, setData] = useState({ users: [], teams: [] });
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const Leaderboard = () => {
     async function fetchLeaderboard() {
       setLoading(true);
       try {
-        const res = await fetch(`${base}/leaderboard`);
+        const res = await fetch(endpoint);
         const json = await res.json();
 
         // Accept direct object or nested data
@@ -29,7 +29,7 @@ const Leaderboard = () => {
     }
 
     fetchLeaderboard();
-  }, [base]);
+  }, [endpoint]);
 
   if (loading) return <p>Loading leaderboard...</p>;
 
