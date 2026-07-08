@@ -15,12 +15,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Octofit API is running' });
 });
 
-// API Routes (to be implemented)
-// TODO: Add user routes
-// TODO: Add team routes
-// TODO: Add activity routes
-// TODO: Add leaderboard routes
-// TODO: Add workout routes
+import apiRoutes from './routes/index.js';
+
+// API Routes
+app.use('/api', apiRoutes);
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
