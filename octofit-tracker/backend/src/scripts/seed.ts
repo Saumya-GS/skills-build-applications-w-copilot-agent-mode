@@ -1,6 +1,14 @@
 import mongoose from 'mongoose';
 import { Activity, Team, User, Workout } from '../models/index.js';
 
+/**
+ * Seed the octofit_db database with sample test data for Octofit Tracker.
+ *
+ * - 3 users with profile stats
+ * - 2 teams with member relationships
+ * - 3 activity logs spanning running, cycling, and swimming
+ * - 3 scheduled workouts for workout planning
+ */
 const connectionString = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db';
 
 async function seedDatabase() {
