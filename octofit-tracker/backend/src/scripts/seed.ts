@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { Activity, Team, User, Workout } from '../models/index.js';
 
 /**
- * Seed the octofit_db database with sample test data for Octofit Tracker.
+ * Seed the octofit_db database with test data.
  *
  * - 3 users with profile stats
  * - 2 teams with member relationships
