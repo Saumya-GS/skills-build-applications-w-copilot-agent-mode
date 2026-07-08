@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiService } from '../services/api';
+import Activities from '../components/Activities';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -75,8 +76,7 @@ export default function Dashboard() {
               <h5>Recent Activities</h5>
             </div>
             <div className="card-body">
-              <p className="text-muted">No activities recorded yet. Start logging your workouts!</p>
-              <button className="btn btn-primary">Log Activity</button>
+              <Activities />
             </div>
           </div>
         </div>

@@ -39,6 +39,21 @@ export default function Navigation() {
                 Leaderboard
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/activities">
+                Activities
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/users">
+                Users
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/workouts">
+                Workouts
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
