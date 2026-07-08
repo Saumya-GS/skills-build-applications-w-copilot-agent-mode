@@ -1,5 +1,8 @@
 // API service for Octofit backend communication
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME || import.meta.env.CODESPACE_NAME;
+const API_BASE_URL = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api`
+  : import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
 export const apiService = {
   // Helper method for API calls
